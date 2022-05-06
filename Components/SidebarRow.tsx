@@ -9,7 +9,7 @@ const SidebarRow = ({ Icon, title }: Props) => {
   return (
     <div>
       <Icon />
-      <p></p>
+      <p>{title}</p>
     </div>
   )
 }
