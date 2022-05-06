@@ -1,8 +1,9 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
+import {sanityClient} from '../../sanity'
 
 type Data = {
-  name: string
+  tweets: Tweet[], 
 }
 
 export default function handler(
