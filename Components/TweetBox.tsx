@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   CalendarIcon,
   EmojiHappyIcon,
@@ -8,6 +8,8 @@ import {
 } from '@heroicons/react/outline'
 
 const TweetBox = () => {
+  const [input, setInput] = useState<string>('')
+
   return (
     <div className="flex space-x-2 p-5">
       <img
@@ -19,6 +21,8 @@ const TweetBox = () => {
       <div className="flex flex-1 items-center pl-2">
         <form className="flex flex-1 flex-col">
           <input
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
             type="text"
             placeholder="What's Happening?"
             className="h-24 w-full text-xl outline-none placeholder:text-xl"
@@ -32,7 +36,10 @@ const TweetBox = () => {
               <LocationMarkerIcon className="h-5 w-5" />
             </div>
 
-            <button className="rounded-full bg-twitter px-5 py-2 font-bold text-white">
+            <button
+              disabled={!input}
+              className="rounded-full bg-twitter px-5 py-2 font-bold text-white disabled:opacity-40"
+            >
               Tweet
             </button>
           </div>
