@@ -1,5 +1,6 @@
 import { SearchIcon } from '@heroicons/react/outline'
 import React from 'react'
+import { TwitterTimelineEmbed } from 'react-twitter-embed'
 
 const Widgets = () => {
   return (
@@ -13,6 +14,11 @@ const Widgets = () => {
           className="flex-1 bg-transparent outline-none"
         />
       </div>
+      <TwitterTimelineEmbed
+        sourceType="profile"
+        screenName="elonmusk"
+        options={{ height: 1000 }}
+      />
     </div>
   )
 }
