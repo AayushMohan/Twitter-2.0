@@ -2,6 +2,7 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Feed from '../Components/Feed'
 import Sidebar from '../Components/Sidebar'
+import Widgets from '../Components/Widgets'
 
 const Home: NextPage = () => {
   return (
@@ -18,6 +19,7 @@ const Home: NextPage = () => {
         <Feed />
 
         {/* Widgets */}
+        <Widgets />
       </main>
     </div>
   )
