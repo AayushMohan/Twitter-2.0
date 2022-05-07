@@ -1,5 +1,5 @@
-import React from 'react'
-import { Tweet } from '../typings'
+import React, { useEffect, useState } from 'react'
+import { Comment, Tweet } from '../typings'
 import TimeAgo from 'react-timeago'
 import {
   ChatAlt2Icon,
@@ -7,12 +7,24 @@ import {
   SwitchHorizontalIcon,
   UploadIcon,
 } from '@heroicons/react/outline'
+import { fetchComments } from '../utils/fetchComments'
 
 interface Props {
   tweet: Tweet
 }
 
 const Tweet = ({ tweet }: Props) => {
+  const [comments, setComments] = useState<Comment[]>([])
+
+  const refreshComments = async () => {
+    const comments: Comment[] = await fetchComments(tweet._id)
+    setComments(comments)
+  }
+
+  useEffect(() => {
+    refreshComments()
+  }, [])
+
   return (
     <div className="flex flex-col space-x-3 border-y border-gray-100 p-5">
       <div className="flex space-x-3">
@@ -64,6 +76,33 @@ const Tweet = ({ tweet }: Props) => {
           <UploadIcon className="h-5 w-5" />
         </div>
       </div>
+
+      {/* Comment Box Logic */}
+      {comments?.length > 0 && (
+        <div>
+          {comments.map((comment) => (
+            <div key={comment._id}>
+              <img
+                src={comment.profileImg}
+                alt=""
+                className="h-7 w-7 rounded-full object-cover"
+              />
+              <div>
+                <div className="flex items-center">
+                  <p>{comment.username}</p>
+                  <p>@{comment.username.replace(/\s+/g, '').toLowerCase()} •</p>
+                </div>
+
+                <TimeAgo
+                  className="text-sm text-gray-500"
+                  date={comment._createdAt}
+                />
+              </div>
+              <p>{comment.comment}</p>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   )
 }
