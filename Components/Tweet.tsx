@@ -16,6 +16,11 @@ const Tweet = ({ tweet }: Props) => {
           <div>
             <p>{tweet.username}</p>
             <p>@{tweet.username.replace(/\s+/g, '').toLowerCase()}</p>
+
+            <TimeAgo
+              className="text-sm text-gray-500"
+              date={tweet._createdAt}
+            />
           </div>
         </div>
       </div>
