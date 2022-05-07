@@ -79,26 +79,27 @@ const Tweet = ({ tweet }: Props) => {
 
       {/* Comment Box Logic */}
       {comments?.length > 0 && (
-        <div>
+        <div className="my-2 mt-5 max-h-44 space-y-5 overflow-y-scroll border-t border-gray-100 p-5">
           {comments.map((comment) => (
-            <div key={comment._id}>
+            <div key={comment._id} className="flex space-x-2">
               <img
                 src={comment.profileImg}
                 alt=""
                 className="h-7 w-7 rounded-full object-cover"
               />
               <div>
-                <div className="flex items-center">
-                  <p>{comment.username}</p>
-                  <p>@{comment.username.replace(/\s+/g, '').toLowerCase()} •</p>
+                <div className="flex items-center space-x-1">
+                  <p className="mr-1 font-bold">{comment.username}</p>
+                  <p className="hidden text-sm text-gray-500 lg:inline">
+                    @{comment.username.replace(/\s+/g, '').toLowerCase()} •
+                  </p>
+                  <TimeAgo
+                    className="text-sm text-gray-500"
+                    date={comment._createdAt}
+                  />
                 </div>
-
-                <TimeAgo
-                  className="text-sm text-gray-500"
-                  date={comment._createdAt}
-                />
+                <p>{comment.comment}</p>
               </div>
-              <p>{comment.comment}</p>
             </div>
           ))}
         </div>
