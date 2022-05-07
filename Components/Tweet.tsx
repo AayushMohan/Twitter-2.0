@@ -61,7 +61,7 @@ const Tweet = ({ tweet }: Props) => {
       <div className="mt-5 flex justify-between">
         <div className="flex cursor-pointer items-center space-x-3 text-gray-400 hover:text-twitter">
           <ChatAlt2Icon className="h-8 w-8 rounded-full p-1 hover:bg-blue-100" />
-          <p>5</p>
+          <p>{comments.length}</p>
         </div>
 
         <div className="flex cursor-pointer items-center space-x-3 text-gray-400">
