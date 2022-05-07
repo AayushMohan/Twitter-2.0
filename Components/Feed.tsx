@@ -3,13 +3,17 @@ import React from 'react'
 import { Tweet } from '../typings'
 import TweetBox from './TweetBox'
 import TweetComponent from './Tweet'
+import { fetchTweets } from '../utils/FetchTweets'
 
 interface Props {
   tweets: Tweet[]
 }
 
 const Feed = ({ tweets }: Props) => {
-  console.log(tweets)
+  const handleRefresh = async () => {
+    const tweets = await fetchTweets()
+  }
+
   return (
     <div className="col-span-7 border-x lg:col-span-5">
       <div className="flex items-center justify-between">
