@@ -8,7 +8,7 @@ interface Props {
 
 const Tweet = ({ tweet }: Props) => {
   return (
-    <div>
+    <div className="flex flex-col space-x-3 border-y border-gray-100 p-5">
       <div className="flex space-x-3">
         <img
           className="h-10 w-10 rounded-full object-cover"
@@ -20,7 +20,7 @@ const Tweet = ({ tweet }: Props) => {
           <div className="flex items-center space-x-1">
             <p className="mr-1 font-bold">{tweet.username}</p>
             <p className="hidden text-sm text-gray-500 sm:inline">
-              @{tweet.username.replace(/\s+/g, '').toLowerCase()}
+              @{tweet.username.replace(/\s+/g, '').toLowerCase()} •
             </p>
 
             <TimeAgo
@@ -30,7 +30,13 @@ const Tweet = ({ tweet }: Props) => {
           </div>
           <p className="pt-1">{tweet.text}</p>
 
-          {tweet.image && <img src={tweet.image} alt="" />}
+          {tweet.image && (
+            <img
+              src={tweet.image}
+              alt=""
+              className="m-5 ml-0 mb-1 max-h-60 rounded-lg object-cover shadow-sm"
+            />
+          )}
         </div>
       </div>
 
