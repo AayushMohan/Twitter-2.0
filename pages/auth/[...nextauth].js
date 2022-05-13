@@ -9,5 +9,6 @@ export default NextAuth({
       version: '2.0',
     }),
     // ...add more providers here
+    // Add Firebase For Auth
   ],
 })
