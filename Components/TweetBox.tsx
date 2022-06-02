@@ -10,6 +10,7 @@ import { useSession } from 'next-auth/react'
 
 const TweetBox = () => {
   const [input, setInput] = useState<string>('')
+  const [image, setImage] = useState<string>('')
   const { data: session } = useSession()
   const [imageUrlBoxIsOpen, setImageUrlBoxIsOpen] = useState(false)
 
@@ -17,6 +18,18 @@ const TweetBox = () => {
 
   const imageUrlBoxIsOpenHandler = () => {
     setImageUrlBoxIsOpen(!imageUrlBoxIsOpen)
+  }
+
+  const addImageToTweet = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.preventDefault()
+
+    if (!imageInputRef.current?.value) return
+
+    setImage(imageInputRef.current.value)
+    imageInputRef.current.value = ''
+    setImageUrlBoxIsOpen(false)
   }
 
   return (
@@ -63,7 +76,13 @@ const TweetBox = () => {
                 type="text"
                 placeholder="Enter Image URL"
               />
-              <button className="font-bold text-white">Add Image</button>
+              <button
+                type="submit"
+                onClick={addImageToTweet}
+                className="font-bold text-white"
+              >
+                Add Image
+              </button>
             </form>
           )}
         </form>
