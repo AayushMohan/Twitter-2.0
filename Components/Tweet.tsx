@@ -1,5 +1,3 @@
-// Tweet.tsx
-
 import React, { useEffect, useState } from 'react'
 import { Comment, CommentBody, Tweet } from '../typings'
 import TimeAgo from 'react-timeago'

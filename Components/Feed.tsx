@@ -3,8 +3,8 @@ import React, { useState } from 'react'
 import { Tweet } from '../typings'
 import TweetBox from './TweetBox'
 import TweetComponent from './Tweet'
-import { fetchTweets } from '../utils/fetchTweets'
 import toast from 'react-hot-toast'
+import { fetchTweets } from '../utils/fetchTweets'
 
 interface Props {
   tweets: Tweet[]
