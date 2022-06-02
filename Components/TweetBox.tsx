@@ -11,6 +11,11 @@ import { useSession } from 'next-auth/react'
 const TweetBox = () => {
   const [input, setInput] = useState<string>('')
   const { data: session } = useSession()
+  const [imageUrlBoxIsOpen, setImageUrlBoxIsOpen] = useState(false)
+
+  const imageUrlBoxIsOpenHandler = () => {
+    setImageUrlBoxIsOpen(!imageUrlBoxIsOpen)
+  }
 
   return (
     <div className="flex space-x-2 p-5">
@@ -31,7 +36,10 @@ const TweetBox = () => {
           />
           <div className="flex items-center">
             <div className="flex flex-1 space-x-2 text-twitter">
-              <PhotographIcon className="h-5 w-5 cursor-pointer transition-transform duration-150 ease-out hover:scale-150" />
+              <PhotographIcon
+                onClick={imageUrlBoxIsOpenHandler}
+                className="h-5 w-5 cursor-pointer transition-transform duration-150 ease-out hover:scale-150"
+              />
               <SearchCircleIcon className="h-5 w-5" />
               <EmojiHappyIcon className="h-5 w-5" />
               <CalendarIcon className="h-5 w-5" />
@@ -45,6 +53,12 @@ const TweetBox = () => {
               Tweet
             </button>
           </div>
+          {imageUrlBoxIsOpen && (
+            <form>
+              <input type="text" placeholder="Enter Image URL" />
+              <button>Add Image</button>
+            </form>
+          )}
         </form>
       </div>
     </div>
