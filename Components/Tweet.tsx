@@ -8,6 +8,7 @@ import {
   UploadIcon,
 } from '@heroicons/react/outline'
 import { fetchComments } from '../utils/fetchComments'
+import { useSession } from 'next-auth/react'
 
 interface Props {
   tweet: Tweet
@@ -15,6 +16,10 @@ interface Props {
 
 const Tweet = ({ tweet }: Props) => {
   const [comments, setComments] = useState<Comment[]>([])
+
+  const [commentBoxIsVisible, setCommentBoxIsVisible] = useState(false)
+  const [input, setInput] = useState('')
+  const { data: session } = useSession()
 
   const refreshComments = async () => {
     const comments: Comment[] = await fetchComments(tweet._id)
@@ -24,6 +29,10 @@ const Tweet = ({ tweet }: Props) => {
   useEffect(() => {
     refreshComments()
   }, [])
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+  }
 
   return (
     <div className="flex flex-col space-x-3 border-y border-gray-100 p-5">
@@ -57,9 +66,13 @@ const Tweet = ({ tweet }: Props) => {
           )}
         </div>
       </div>
-
       <div className="mt-5 flex justify-between">
-        <div className="flex cursor-pointer items-center space-x-3 text-gray-400 hover:text-twitter">
+        <div
+          onClick={() =>
+            session && setCommentBoxIsVisible(!commentBoxIsVisible)
+          }
+          className="flex cursor-pointer items-center space-x-3 text-gray-400 hover:text-twitter"
+        >
           <ChatAlt2Icon className="h-8 w-8 rounded-full p-1 hover:bg-blue-100" />
           <p>{comments.length}</p>
         </div>
@@ -76,8 +89,26 @@ const Tweet = ({ tweet }: Props) => {
           <UploadIcon className="h-5 w-5" />
         </div>
       </div>
-
       {/* Comment Box Logic */}
+      {commentBoxIsVisible && (
+        <form className="mt-3 flex space-x-3" onClick={handleSubmit}>
+          <input
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            className="flex-1 rounded-lg bg-gray-100 p-2 outline-none"
+            type="text"
+            placeholder="Write A Comment..."
+          />
+          <button
+            disabled={!input}
+            type="submit"
+            className="disabled text-twitter disabled:text-gray-200"
+          >
+            Post
+          </button>
+        </form>
+      )}
+
       {comments?.length > 0 && (
         <div className="my-2 mt-5 max-h-44 space-y-5 overflow-y-scroll border-t border-gray-100 p-5">
           {comments.map((comment) => (
