@@ -4,7 +4,7 @@ import { Tweet } from '../typings'
 import TweetBox from './TweetBox'
 import TweetComponent from './Tweet'
 import toast from 'react-hot-toast'
-import { fetchTweets } from '../utils/fetchTweets'
+import { fetchTweets } from '../util/fetchTweets'
 
 interface Props {
   tweets: Tweet[]

@@ -5,7 +5,7 @@ import Feed from '../Components/Feed'
 import Sidebar from '../Components/Sidebar'
 import Widgets from '../Components/Widgets'
 import { Tweet } from '../typings'
-import { fetchTweets } from '../utils/fetchTweets'
+import { fetchTweets } from '../util/fetchTweets'
 
 interface Props {
   tweets: Tweet[]
