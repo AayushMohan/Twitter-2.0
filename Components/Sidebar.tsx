@@ -7,8 +7,8 @@ import {
   DotsCircleHorizontalIcon,
   MailIcon,
   UserIcon,
-  HomeIcon,
 } from '@heroicons/react/outline'
+import { HomeIcon } from '@heroicons/react/solid'
 import SidebarRow from './SidebarRow'
 import { signIn, signOut, useSession } from 'next-auth/react'
 
