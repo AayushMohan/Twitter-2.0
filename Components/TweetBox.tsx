@@ -8,7 +8,7 @@ import {
 } from '@heroicons/react/outline'
 import { useSession } from 'next-auth/react'
 import { Tweet, TweetBody } from '../typings'
-import { fetchTweets } from '../util/fetchTweets'
+import { fetchTweets } from '../utils/fetchTweets'
 import toast from 'react-hot-toast'
 
 interface Props {
