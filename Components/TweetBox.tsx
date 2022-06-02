@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import {
   CalendarIcon,
   EmojiHappyIcon,
@@ -12,6 +12,8 @@ const TweetBox = () => {
   const [input, setInput] = useState<string>('')
   const { data: session } = useSession()
   const [imageUrlBoxIsOpen, setImageUrlBoxIsOpen] = useState(false)
+
+  const imageInputRef = useRef<HTMLInputElement>(null)
 
   const imageUrlBoxIsOpenHandler = () => {
     setImageUrlBoxIsOpen(!imageUrlBoxIsOpen)
@@ -54,9 +56,14 @@ const TweetBox = () => {
             </button>
           </div>
           {imageUrlBoxIsOpen && (
-            <form>
-              <input type="text" placeholder="Enter Image URL" />
-              <button>Add Image</button>
+            <form className="mt-5 flex rounded-lg bg-twitter/80 py-2 px-4">
+              <input
+                ref={imageInputRef}
+                className="flex-1 bg-transparent p-2 text-white outline-none placeholder:text-white"
+                type="text"
+                placeholder="Enter Image URL"
+              />
+              <button className="font-bold text-white">Add Image</button>
             </form>
           )}
         </form>
