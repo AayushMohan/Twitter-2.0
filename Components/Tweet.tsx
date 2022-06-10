@@ -19,6 +19,7 @@ function Tweet({ tweet }: Props) {
   const [commentBoxVisible, setCommentBoxVisible] = useState<boolean>(false)
   const [input, setInput] = useState<string>('')
   const [comments, setComments] = useState<Comment[]>([])
+  const [likesCount, setLikesCount] = useState(0)
 
   const { data: session } = useSession()
 
@@ -30,6 +31,11 @@ function Tweet({ tweet }: Props) {
   useEffect(() => {
     refreshComments()
   }, [])
+
+  // Like Button Logic
+  const handleLikeCountHandler = () => {
+    setLikesCount(likesCount + 1)
+  }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -99,19 +105,23 @@ function Tweet({ tweet }: Props) {
       <div className="mt-5 flex justify-between">
         <div
           onClick={(e) => session && setCommentBoxVisible(!commentBoxVisible)}
-          className="flex cursor-pointer items-center space-x-3 text-gray-400"
+          className="flex cursor-pointer items-center space-x-3 text-gray-400 hover:text-blue-300"
         >
-          <ChatAlt2Icon className="h-5 w-5" />
-          <p>{comments.length}</p>
+          <ChatAlt2Icon className="h-8 w-8 rounded-full p-1.5 hover:bg-blue-50" />
+          <p className="hover:text-blue-300">{comments.length}</p>
         </div>
-        <div className="flex cursor-pointer items-center space-x-3 text-gray-400">
-          <SwitchHorizontalIcon className="h-5 w-5" />
+        <div className="flex cursor-pointer items-center space-x-3 rounded-full text-gray-400 hover:bg-green-100 hover:text-green-400">
+          <SwitchHorizontalIcon className="h-8 w-8 rounded-full p-1.5" />
         </div>
-        <div className="flex cursor-pointer items-center space-x-3 text-gray-400">
-          <HeartIcon className="h-5 w-5" />
+        <div
+          className="flex cursor-pointer items-center space-x-3 text-gray-400 hover:text-[#f91800]"
+          onClick={handleLikeCountHandler}
+        >
+          <HeartIcon className="h-8 w-8 rounded-full p-1.5 hover:bg-pink-100" />
+          <p>{likesCount}</p>
         </div>
-        <div className="flex cursor-pointer items-center space-x-3 text-gray-400">
-          <UploadIcon className="h-5 w-5" />
+        <div className="flex cursor-pointer items-center space-x-3 pr-1 text-gray-400 hover:text-blue-300">
+          <UploadIcon className="h-8 w-8 rounded-full p-1.5 hover:bg-blue-100" />
         </div>
       </div>
 
